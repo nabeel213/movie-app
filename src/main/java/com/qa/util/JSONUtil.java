@@ -1,11 +1,11 @@
 package com.qa.util;
 
 import com.google.gson.Gson;
-public class JSONUtill {
+public class JSONUtil {
 	
 	private Gson gson;
 	
-	public JSONUtill() {
+	public JSONUtil() {
 		
 		this.gson = new Gson();
 	}
