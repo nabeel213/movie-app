@@ -43,12 +43,9 @@ public class MovieDBRepository implements IMovieRepository {
 			return util.getJSONForObject(aMovie);
 		}
 		else {
-			
 			return "{\"message\":\"movie not found\"}";
-			
 		}
 	}
-
 	private Movie getMovie(Long id) {
 		return manager.find(Movie.class, id);
 	}
@@ -60,7 +57,23 @@ public class MovieDBRepository implements IMovieRepository {
 		Movie aMovie = util.getObjectForJSON(movieJSON, Movie.class);
 		
 		manager.persist(aMovie);
-		
 		return "{\"message\":\"movie created found\"}";
+	}
+
+	@Override
+	@Transactional(REQUIRED)
+	public String removeMovie(Long id) {
+		
+		Movie aMovie = getMovie(id);
+		
+		if(aMovie !=null) {
+			manager.remove(aMovie);
+			
+			return "{\"message\":\"Removed\"}";
+		}
+		else {
+			
+			return "{\"message\":\"movie not found\"}";
+		}
 	}
 }
